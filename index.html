@@ -47,17 +47,17 @@ body{font-family:'Noto Serif JP','ヒラギノ明朝 Pro',serif;}
 @keyframes twinkle{0%,100%{opacity:0.15;transform:scale(0.8);}50%{opacity:1;transform:scale(1.2);}}
 .inner{max-width:420px;margin:0 auto;position:relative;z-index:1;}
 .header{text-align:center;margin-bottom:2rem;padding-top:0.5rem;}
-.header-deco{font-size:10px;letter-spacing:0.35em;color:rgba(140,120,180,0.7);margin-bottom:0.6rem;font-family:'Cormorant Garamond',serif;}
+.header-deco{font-size:14px;letter-spacing:0.35em;color:rgba(140,120,180,0.7);margin-bottom:0.6rem;font-family:'Cormorant Garamond',serif;}
 .logo-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;margin-bottom:6px;}
 .logo-main{
   font-family:'Cormorant Garamond',serif;
-  font-size:28px;font-weight:300;font-style:italic;
+  font-size:36px;font-weight:300;font-style:italic;
   letter-spacing:0.06em;line-height:1.2;
   background:linear-gradient(135deg,#8a7ab8 0%,#b89ad8 30%,#d4aacc 55%,#c8b4e0 75%,#90a8d0 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   filter:drop-shadow(0 0 12px rgba(180,160,220,0.5));
 }
-.header p{font-size:11px;color:rgba(130,110,170,0.7);letter-spacing:0.18em;margin-top:4px;}
+.header p{font-size:14px;color:rgba(130,110,170,0.7);letter-spacing:0.18em;margin-top:4px;}
 .mode-select{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem;}
 .mode-btn{
   padding:10px 8px;border-radius:30px;font-size:13px;
@@ -142,7 +142,7 @@ body{font-family:'Noto Serif JP','ヒラギノ明朝 Pro',serif;}
   background:linear-gradient(90deg,transparent,rgba(190,170,220,0.4),rgba(200,220,240,0.3),rgba(190,170,220,0.4),transparent);
   margin:1.1rem 0;
 }
-.section-label{font-size:10px;color:rgba(150,130,185,0.6);letter-spacing:0.25em;margin-bottom:8px;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;}
+.section-label{font-size:14px;color:rgba(130,110,170,0.85);letter-spacing:0.25em;margin-bottom:8px;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;}
 .soul-msg{
   font-size:14px;color:rgba(100,80,150,0.9);
   line-height:1.9;text-align:center;
@@ -184,7 +184,7 @@ body{font-family:'Noto Serif JP','ヒラギノ明朝 Pro',serif;}
   padding:1.2rem;text-align:center;margin-bottom:1.5rem;
   backdrop-filter:blur(6px);
 }
-.affirmation-label{font-size:10px;color:rgba(155,135,190,0.65);letter-spacing:0.28em;margin-bottom:8px;font-family:'Cormorant Garamond',serif;font-style:italic;}
+.affirmation-label{font-size:14px;color:rgba(130,110,170,0.85);letter-spacing:0.28em;margin-bottom:8px;font-family:'Cormorant Garamond',serif;font-style:italic;}
 .affirmation-text{
   font-family:'Cormorant Garamond',serif;
   font-size:16px;font-style:italic;
@@ -206,15 +206,9 @@ body{font-family:'Noto Serif JP','ヒラギノ明朝 Pro',serif;}
   flex-direction:column;
   min-height:100vh;
 }
-.footer{
-  margin-top:auto;
-  padding:1.5rem 1rem 1.5rem;
-  text-align:center;
-  font-size:11px;
-  color:rgba(140,120,175,0.6);
-  letter-spacing:0.08em;
-  font-family:'Noto Serif JP',serif;
-}
+
+.inner{display:flex;flex-direction:column;min-height:100vh;}
+.footer{margin-top:auto;padding:1.5rem 1rem 1.5rem;text-align:center;font-size:11px;color:rgba(140,120,175,0.6);letter-spacing:0.08em;font-family:'Noto Serif JP',serif;}
 </style>
 
 <div class="app" id="app">
@@ -781,7 +775,18 @@ function updatePos(){
   document.getElementById('tab-rev').className='pos-tab'+(activePos==='reversed'?' active':'');
   document.getElementById('pos-msg').textContent=activePos==='upright'?cur.upright:cur.reversed;
 }
-function showPos(p){activePos=p;updatePos();}
+function showPos(p){
+  activePos=p;
+  const imgWrap=document.getElementById('img-wrap');
+  if(p==='reversed'){
+    imgWrap.className='card-img-wrap is-reversed';
+    document.getElementById('rev-badge').style.display='block';
+  } else {
+    imgWrap.className='card-img-wrap';
+    document.getElementById('rev-badge').style.display='none';
+  }
+  updatePos();
+}
 function handleErr(){document.getElementById('card-img').style.display='none';document.getElementById('img-ph').style.display='flex';}
 function resetApp(){document.getElementById('card-display').className='card-display';document.getElementById('card-num').value='';window.scrollTo({top:0,behavior:'smooth'});}
 
